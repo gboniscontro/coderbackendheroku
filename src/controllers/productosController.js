@@ -4,7 +4,7 @@ const logger = require('../logger');
 
 //const { productos } = require('../models/productsModel')
 
-const { productos } = require('../daos/ProductosDao' + TIPO_PERSISTENCIA);
+const { productos } = require('../daos/productosDao' + TIPO_PERSISTENCIA);
 
 module.exports = {
   getAll: (request, response) => {
