@@ -14,21 +14,26 @@ class UsersService {
     logger.info(`usersService.js - login`);
     try {
       const data = await this.userDao.getUserbyEmail(email);
-      if ( data==undefined || data ==null)  return false
+      if (data == undefined || data == null) return false;
       const usuario = new UserDto(data);
       if (!usuario.isValidPassword(password)) return false;
-      
+
       return usuario.get();
     } catch (err) {
       //logger.error(`Error al loguearse: ${JSON.stringify(err)}`);
       throw new ObjError(401, `Error al loguearse`, err);
-      return false
+      return false;
     }
   }
 
   async getUsuario(email) {
     logger.info(`usersService.js - getUsuario(${email})`);
     const usuariosObj = await this.userDao.getUserbyEmail(email);
+    return usuariosObj;
+  }
+  async getUsuariobyId(Id) {
+    logger.info(`usersService.js - getUsuario(${Id})`);
+    const usuariosObj = await this.userDao.getById(Id);
     return usuariosObj;
   }
   //alta de usuario nuevo

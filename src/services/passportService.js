@@ -6,7 +6,6 @@ const { createHash, isValidPassword } = require('../utils.js');
 const UsersService = require('./usersService');
 const userService = new UsersService();
 
-
 const LocalStrategy = local.Strategy;
 
 const initializePassport = () => {
@@ -46,15 +45,15 @@ const initializePassport = () => {
         logger.info(`passportService.js - passport.use --> login ${username}`);
 
         let user = await userService.login(username, password);
-       // logger.info('invalid password o user not found', user);
+        // logger.info('invalid password o user not found', user);
         if (!user) {
-         // logger.info('invalid password o user not found');
+          // logger.info('invalid password o user not found');
           return done(null, false, { message: 'Invalid password' });
         }
 
         return done(null, user);
       } catch (err) {
-       // logger.info('error not found');
+        // logger.info('error not found');
         done(err);
       }
     }),
@@ -62,11 +61,11 @@ const initializePassport = () => {
 
   passport.serializeUser((user, done) => {
     logger.info(`passportService.js - passport.serializeUser ${JSON.stringify(user)}`);
-    done(null, user);
+    done(null, user._id);
   });
-  passport.deserializeUser((user, done) => {
-    logger.info(`passportService.js - passport.deserializeUser ${JSON.stringify(user)}`);
-
+  passport.deserializeUser(async (id, done) => {
+    logger.info(`passportService.js - passport.deserializeUser ${id}`);
+    let user = await userService.getUsuariobyId(id);
     done(null, user);
   });
 };

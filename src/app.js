@@ -8,6 +8,8 @@ const carritoRouter = require('./routes/carritosRoutes');
 const defRoute = require('./routes/default');
 const webRoute = require('./routes/webRoutes');
 const random = require('./routes/random');
+const initializePassport = require('./services/passportService.js');
+const passport = require('passport');
 
 const Normal = require('./normal');
 const path = require('path');
@@ -48,19 +50,23 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 app.use(
   session({
     // store: MongoStore.create({ mongoUrl: config.mongoLocal.cnxStr }),
-    store: MongoStore.create({ mongoUrl: MONGO_URI }),
+    store: MongoStore.create({ mongoUrl: MONGO_URI, mongoOptions: advancedOptions }),
     secret: 'shhhhhhhhhhhhhhhhhhhhh',
-    resave: false,
-    saveUninitialized: false,
-    rolling: true,
+    resave: true,
+    saveUninitialized: true,
     cookie: {
-      maxAge: 60000,
+      maxAge: 600000,
     },
   }),
 );
+
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session()); //.authenticate('session'));
 
 //Engine
 app.set('view engine', 'ejs');
@@ -71,8 +77,9 @@ app.use('/api/productos', productosRouter);
 app.use('/api/carrito', carritoRouter);
 app.use('/api/randoms', random);
 
-//app.use('/', webPass);
 app.use('/', webRoute);
+app.use('/', defRoute); //son todas las rutas que no existen
+
 
 //agregamos apollo graphql
 //const  connectDB = require('./db.js');
