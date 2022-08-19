@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <%- include('partials/head') %>
+    <script src="../socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+  </head>
+
+  <body class="fondo__degrade">
+    <!-- header -->
+    <%- include('partials/header') %>
+
+    <div class="container row">
+      <div class="jumbotron col-sm-4 pull-center">
+        <form autocomplete="off" action="/login" method="post">
+          <div class="form-group">
+            <label>Username:</label>
+            <input class="form-control" required type="text" name="username" />
+          </div>
+          <div class="form-group">
+            <label>Password:</label>
+            <input class="form-control" required type="password" name="password" />
+          </div>
+          <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="Log In" />
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <%- include('partials/footer') %>
+  </body>
+</html>

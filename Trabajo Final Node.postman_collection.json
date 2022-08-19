@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "de16aad7-2dbb-4113-8333-5e1cf54f6f30",
+		"name": "Trabajo Final Node",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16083608"
+	},
+	"item": [
+		{
+			"name": "getProducto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/productos",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProductos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n {\r\n    nombre: 'Articulo1',\r\n    descripcion: 'Esta es la descripcion ',\r\n    codigo: 'licazul',\r\n    foto: 'https://st.depositphotos.com/1742172/5004/v/600/depositphotos_50040285-stock-illustration-cartoon-kitchen-blender.jpg',\r\n    precio: 100,\r\n    stock: 50,\r\n  },\r\n  {\r\n    nombre: 'Articulo2',\r\n    descripcion: 'Esta es la descripcion de la aspiradora',\r\n    codigo: 'aspverde',\r\n    foto: 'https://www.consumoteca.com/wp-content/uploads/Aspirador-escoba-y-de-mano-AEG.png',\r\n    precio: 200,\r\n    stock: 90,\r\n  },\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/productos",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProducto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"nombre\": \"Tornillo\",\r\n        \"descripcion\": \"Esta es la descripcion del tornillo\",\r\n        \"codigo\": \"AA0025\",\r\n        \"foto\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/paint-color-pallete-brush-academy-128.png\",\r\n        \"precio\": 200,\r\n        \"stock\": 500,\r\n        \"timestamp\": 1655941358220\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/productos/25",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"productos",
+						"25"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProduct",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/productos/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"productos",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addCart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/carrito",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carrito"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCart",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/carrito/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carrito",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductsCart",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/carrito/1/productos",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carrito",
+						"1",
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProductsCart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\": \"62cde062b5b46c57c0d200ed\"\r\n    },\r\n    {\r\n        \"id\": \"62cde062b5b46c57c0d200ef\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/carrito/62cdedddb6189bc9dc06dc5f/productos",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carrito",
+						"62cdedddb6189bc9dc06dc5f",
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProductCart",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/carrito/3/productos/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carrito",
+						"3",
+						"productos",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RutaNoExistente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/ruta_no_existente",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ruta_no_existente"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

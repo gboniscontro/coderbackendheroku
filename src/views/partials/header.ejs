@@ -1,0 +1,32 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100 px-4">
+    <a class="navbar-brand" href="#"><img src="/img/logo.jfif" alt="Logo de Empresa" width="60px" /></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="nav navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="/signup">Registrarse</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Dashboard </a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="/info">Info Servidor</a></li>
+      </ul>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <% if(nombre!==undefined){ %>
+      <li class="nav-item"><a class="nav-link" href="/chat">Chat</a></li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout"
+          >Logout &nbsp;&nbsp;<span style="color: white"><strong><%= nombre %></strong></span></a
+        >
+      </li>
+      <% } else { %>
+      <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+      <% } %>
+    </ul>
+  </nav>
+  <br /><br />
+</header>

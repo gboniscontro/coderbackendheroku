@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <%- include('partials/head') %>
+    <script src="../socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+  </head>
+
+  <body class="fondo__degrade">
+    <!-- header -->
+    <%- include('partials/header') %>
+
+    <div class="jumbotron">
+      <h1 class="alert alert-primary">Hasta luego, <%= nombre %>!</h1>
+    </div>
+    <script>
+      window.setTimeout("document.location.href = '/login'", 2000);
+    </script>
+
+    <!-- footer -->
+    <%- include('partials/footer') %>
+  </body>
+</html>

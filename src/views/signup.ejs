@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <%- include('partials/head') %>
+  </head>
+
+  <body class="fondo__degrade">
+    <!-- header -->
+    <%- include('partials/header') %>
+
+    <div class="container row">
+      <div class="jumbotron col-sm-4 pull-center">
+        <form autocomplete="off" action="/signup" method="post">
+          <!-- email -->
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Correo(username): </span>
+            </div>
+            <input type="email" id="username" name="username" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Correo electrinico" required />
+          </div>
+          <!-- password -->
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">clave: </span>
+            </div>
+            <input type="password" id="password" name="password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Clave" required />
+          </div>
+
+          <!-- Nombre -->
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Nombre: </span>
+            </div>
+            <input type="text" name="nombre" id="nombre" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Nombre" required />
+          </div>
+          <!-- Apellido -->
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Apellido: </span>
+            </div>
+            <input type="text" id="apellido" name="apellido" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Apellido" required />
+          </div>
+          <!-- Direccion -->
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Direccion: </span>
+            </div>
+            <input type="text" id="direccion" name="direccion" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="direccion" required />
+          </div>
+          <!-- Fecha de Nacimiento -->
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Fecha de Nacimiento: </span>
+            </div>
+            <input type="text" id="fechaNacimiento" name="fechaNacimiento" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="fechaNacimiento" required />
+          </div>
+          <!-- Telefono -->
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Teléfono: </span>
+            </div>
+            <input type="text" id="telefono" name="telefono" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="telefono" required />
+          </div>
+          <!-- Avatar -->
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Avatar: </span>
+            </div>
+
+            <input type="text" id="avatar" name="avatar" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="avatar.png" value="avatar.png" required />
+            &nbsp;<a href="/subirArchivos/" target="_blank">Subir Archivo</a>&nbsp;
+          </div>
+
+          <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="Sign Up" />
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <%- include('partials/footer') %>
+  </body>
+</html>
