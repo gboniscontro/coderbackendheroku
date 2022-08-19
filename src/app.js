@@ -13,7 +13,7 @@ const Normal = require('./normal');
 const path = require('path');
 const { apiAuth, webAuth } = require('./middlewares/admin');
 //const webPass = require('./routes/webPassport');
-const { MODO,MONGO_URI } = require('./config/globals');
+const { MODO, MONGO_URI } = require('./config/globals');
 const compression = require('compression');
 
 const app = express();
@@ -27,7 +27,6 @@ mongoose.connect(
   },
   () => console.log('Connected mongoose'),
 );
-
 
 //const util = require('util')
 /*
@@ -81,7 +80,6 @@ app.use('/', webRoute);
 const { ApolloServer } = require('apollo-server-express');
 const typeDefs = require('./graphql/typeDefs.js');
 const resolvers = require('./graphql/resolvers.js');
-const { ContenedorMensaje } = require('../../ProyectoFinalNode2/src/contenedorsql');
 
 async function start() {
   const apolloServer = new ApolloServer({
@@ -96,7 +94,7 @@ async function start() {
 
 start();
 
-module.exports = app
+module.exports = app;
 //chat
 /*
 io.on('connection', async function (socket) {
