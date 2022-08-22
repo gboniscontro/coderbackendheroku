@@ -37,9 +37,9 @@ before(async () => {
   mongoose
     .connect(config.MONGO_URI)
     .then((db) => {
-      console.log('conectados a la base de datos');
+      logger.info('conectados a la base de datos');
       mongoose.connection.db.dropDatabase(function (err, result) {
-        console.log(err);
+        if (err) logger.info(err);
       });
     })
     .then(() => conectarServidor(app));
@@ -72,7 +72,7 @@ describe('LOGIN USER', () => {
 describe('test de crear Productos y Carrito ', () => {
   let idprod1, idprod2;
 
-  it('Deberia agregar dos productos al carrito', async () => {
+  it('Deberia agregar dos productos al carrito y enviar la orden de pedido', async () => {
     let { data: datanew } = await axios.post(url + '/api/productos', newProduct);
     const { data: dataAll } = await axios.get(url + '/api/productos');
     assert.strictEqual(dataAll.length, newProduct.length);
@@ -95,7 +95,16 @@ describe('test de crear Productos y Carrito ', () => {
       { _id: addprod[0], cant: 1 },
       { _id: addprod[1], cant: 1 },
     ];
-    const { data: dataorder } = await axios.post(url + '/api/order/' + codCarrito);
+    //hay que poner el token bearer
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    //bodyParameters lo dejo como undefined, seria lo que va en el body
+    const bodyParameters = {
+      key: 'value',
+    };
+
+    const { data: dataorder } = await axios.post(url + '/api/order/' + codCarrito, undefined, config);
 
     logger.info(dataorder);
     assert.strictEqual(JSON.stringify(straddprod), JSON.stringify(dataget.dato.productos));

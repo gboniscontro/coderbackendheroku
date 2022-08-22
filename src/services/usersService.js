@@ -69,7 +69,7 @@ class UsersService {
             <p><strong>Teléfono: </strong>${objetoUsuario.telefono}</p>
             <p><strong>Avatar: </strong>${objetoUsuario.imagenUrl}</p>
             <p><strong>Roles: </strong>${objetoUsuario.roles}</p>`;
-      await enviarEmail(correoDestino, asunto, cuerpo);
+      enviarEmail(correoDestino, asunto, cuerpo);
     } catch (err) {
       logger.error(`Falló el envio de mail - error:${err}`);
     }

@@ -26,7 +26,7 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true,
   },
-  () => console.log('Connected mongoose'),
+  () => logger.info('Connected mongoose'),
 );
 app.use(
   compression({
@@ -60,11 +60,23 @@ app.use(passport.session());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-//habia puesto un apiAuth para si no estaba autenticado no poder acceder a la api pero no funcionaba
+
 app.use('/api/productos', productosRouter);
 app.use('/api/carrito', carritoRouter);
 app.use('/api/randoms', random);
-app.use('/api/order', ordersRouter);
+//usamos token jwt para las orden porque corresponde ya estar autenticado con el usuario para realizarlas
+app.use('/api/order', passport.authenticate('jwt', { session: false }), ordersRouter);
+
+//rutas get
+app.get('/secure', passport.authenticate('jwt', { session: false }), (req, res) => {
+  //logger.info('Secure Route', req.user);
+  res.json({
+    message: 'You made it to the secure route',
+    user: req.user,
+    token: req.header('authorization'),
+  });
+});
+
 
 app.use('/', webRoute);
 app.use('/', defRoute); //son todas las rutas que no existen

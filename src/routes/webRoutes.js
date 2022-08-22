@@ -81,8 +81,7 @@ webRoutes.post('/loginjwt', async (req, res, next) => {
   })(req, res, next);
 });
 
-//rutas get
-webRoutes.get('/user', passport.authenticate('jwt', { session: false }), secureRoutes);
+
 
 webRoutes.get('/', passAuth, (req, res) => {
   logger.info('Principal', req.user);

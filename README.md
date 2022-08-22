@@ -4,8 +4,17 @@ se realiza un login en passport, un chat y las rutas para ejecutar por postman e
 
 https://nodecoderbackend.herokuapp.com/
 
-#Ejecutar el test para probar que genera desde cero los productos y el carrito
-#Crea el usuario y hace el login y genera el token en el test
+#ACLARACION no pude ser muy prolijo ya que no tenia mucho tiempo
+
+#Todo el proyecto se puede ver que funciona todo integralmente utilizando los test asi se ve todo el recorrido
+
+#Al Ejecutar el test se borra la base de datos y se genera todo desde cero
+
+#Crea el usuario(envia el mail de registro), hace el login y genera el token en el test.
+
+#Tambien crea productos,carrito y la orden y envia los mails de registro y de pedido al mail utilizado en el archivo de test
+
+#hay que configurar correctamente el .env con la clave de un mail para poder enviar los mails no proporciono mi clave
 
 npm run test
 
@@ -19,7 +28,8 @@ estan en el .json adjunto
 
 usar el .env.sample para configurar el archivo .env
 
-para probar graphql ejecutar el localhost:8080/graphql
+#TAMBIEN USANDO LA RUTA GRAPHQL se puede acceder a un ejemplo de uso con esa herramienta
+ejecutar el localhost:8080/graphql
 
 #Notificaciones por mail
 
