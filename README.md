@@ -1,22 +1,32 @@
-Proyecto subido en heroku : https://nodecoderbackend.herokuapp.com/
-Rutas del proyecto
+#Proyecto subido en heroku
+
+se realiza un login en passport, un chat y las rutas para ejecutar por postman el backend de un ecommerce
+
+https://nodecoderbackend.herokuapp.com/
+
+#Ejecutar el test para probar que genera desde cero los productos y el carrito
+#Crea el usuario y hace el login y genera el token en el test
+
+npm run test
+
+#para ejecutar el proyecto
+
+npm start
+
+#Rutas del proyecto
 
 estan en el .json adjunto
+
 usar el .env.sample para configurar el archivo .env
 
 para probar graphql ejecutar el localhost:8080/graphql
 
-para ejecutar el archivo de test
-npm run test
-
-para ejecutar el proyecto
-npm start
+#Notificaciones por mail
 
 las notificaciones de registro de nuevos usuarios se realizan mediante nodemailer
+
 (ingresar correctamente en el archivo .env la configuracion de su email de gmail para poder realizar el envio con la clave
 correspondiente para poder ejecutar desde esta aplicacion)
-
-
 
 #Ejecucion modo FORK Y CLUSTER
 

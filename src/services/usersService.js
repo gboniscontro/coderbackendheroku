@@ -46,7 +46,7 @@ class UsersService {
       const usuario = new UserDto(objetoUsuario);
       usuario._id = await this.userDao.add(usuario);
       logger.info(`Registro de Usuario Ok `);
-      await this.enviarEmailNuevoUsuario(usuario);
+      this.enviarEmailNuevoUsuario(usuario); //no es necesario esperar a que envie el email con await je
       return usuario.get();
     } catch (err) {
       logger.error(`Error al crear el usuario: ${err}`);

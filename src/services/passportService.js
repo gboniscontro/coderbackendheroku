@@ -1,12 +1,29 @@
 const passport = require('passport');
 const logger = require('../logger');
 const local = require('passport-local');
+const { Strategy: JWTstrategy } = require('passport-jwt');
+const { jwtOpts } = require('../config/globals');
 const { MONGO_URI } = require('../config/globals');
 const { createHash, isValidPassword } = require('../utils.js');
 const UsersService = require('./usersService');
 const userService = new UsersService();
 
 const LocalStrategy = local.Strategy;
+
+async function validarToken(token, done) {
+  try {
+    logger.info(` validarToken`);
+    return done(null, token.user);
+  } catch (error) {
+    done(error);
+  }
+  /*
+ if (token.exp < Math.floor(Date.now() / 1000)) {
+    logger.warn('The token has expired, you must log in again to generate a new token');
+    return cb(null, false);
+  } else return cb(null, token.user);
+*/
+}
 
 const initializePassport = () => {
   passport.use(
@@ -61,12 +78,13 @@ const initializePassport = () => {
 
   passport.serializeUser((user, done) => {
     logger.info(`passportService.js - passport.serializeUser ${JSON.stringify(user)}`);
-    done(null, user._id);
-  });
-  passport.deserializeUser(async (id, done) => {
-    logger.info(`passportService.js - passport.deserializeUser ${id}`);
-    let user = await userService.getUsuariobyId(id);
     done(null, user);
   });
+  passport.deserializeUser(async (user, done) => {
+    logger.info(`passportService.js - passport.deserializeUser ${user}`);
+    const nuser = await userService.getUsuariobyId(user._id);
+    done(null, nuser);
+  });
+  passport.use('jwt', new JWTstrategy(jwtOpts, validarToken));
 };
 module.exports = initializePassport;

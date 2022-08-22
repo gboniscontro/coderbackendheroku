@@ -4,7 +4,12 @@ const webController = require('../controllers/webController');
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
+const { jwtOpts } = require('../config/globals');
 const logger = require('../logger');
+const jwt = require('jsonwebtoken');
+const UsersService = require('../services/usersService');
+const secureRoutes = require('./secureRoutes');
+const userService = new UsersService();
 //const initializePassport = require('../services/passportService.js');
 const { passAuth } = require('../middlewares/admin');
 const path = require('path');
@@ -44,12 +49,41 @@ webRoutes.post('/subirArchivos', upload.single('miArchivo'), (req, res, next) =>
 webRoutes.post('/signup', passport.authenticate('register', { failureRedirect: '/failedRegister' }), (req, res) => {
   res.redirect('/login');
 });
+webRoutes.post('/crearusuario', async (req, res) => {
+  let result = await userService.crearUsuario(req.body);
+  res.send(result);
+});
 webRoutes.post('/login', passport.authenticate('login', { failureRedirect: '/failedLogin' }), (req, res) => {
   //  res.send({ body: req.body, message: "Logged In" })
   res.redirect('/');
 });
 
+webRoutes.post('/loginjwt', async (req, res, next) => {
+  passport.authenticate('login', async (err, user, info) => {
+    try {
+      if (err || !user) {
+        const error = new Error('An error occurred.');
+
+        return next(error);
+      }
+
+      req.login(user, { session: false }, async (error) => {
+        if (error) return next(error);
+
+        const body = { _id: user._id, email: user.email };
+        const token = jwt.sign({ user: body }, jwtOpts.secretOrKey, { expiresIn: jwtOpts.expireIn });
+
+        return res.json({ token });
+      });
+    } catch (error) {
+      return next(error);
+    }
+  })(req, res, next);
+});
+
 //rutas get
+webRoutes.get('/user', passport.authenticate('jwt', { session: false }), secureRoutes);
+
 webRoutes.get('/', passAuth, (req, res) => {
   logger.info('Principal', req.user);
   const nombre = req.user?.nombre;

@@ -1,3 +1,4 @@
+const pass = require('passport-jwt');
 const { string } = require('joi');
 const parseArgs = require('minimist');
 require('dotenv').config();
@@ -12,7 +13,15 @@ if (typeof modo === 'string') {
   modo = 'FORK';
 }
 
+const jwtOpts = {
+  secretOrKey: process.env.SECRET || 'TOP_SECRET',
+  jwtFromRequest: pass.ExtractJwt.fromAuthHeaderAsBearerToken(),
+  ignoreExpiration: process.env.JWT_IGNORE_EXPIRE || false,
+  expireIn: parseInt(process.env.JWT_TIME_EXPIRE) || 3600, //expressed in seconds
+};
+
 module.exports = {
+  jwtOpts: jwtOpts,
   NODE_ENV: process.env.NODE_ENV || 'development',
   HOST: process.env.HOST || 'localhost',
   PORT: puerto || process.env.PORT || 8080,

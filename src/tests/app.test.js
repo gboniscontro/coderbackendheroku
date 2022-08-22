@@ -24,6 +24,8 @@ const newProduct = [
     stock: 90,
   },
 ];
+const newUser = { nombre: 'Gustavo', apellido: 'Boniscontro', username: 'guscaballito@gmail.com', email: 'guscaballito@gmail.com', direccion: 'alberdi 1305', password: '1234', fechaNacimiento: '19920502', telefono: '111111', avatar: 'avatar.png' };
+
 const url = 'http://localhost:8080';
 
 function conectarServidor(app) {
@@ -41,6 +43,30 @@ before(async () => {
       });
     })
     .then(() => conectarServidor(app));
+});
+let token = '';
+describe('CREATE USER', () => {
+  describe('POST /crearusuario', () => {
+    it('deberia crear el usuario ', async () => {
+      const { data } = await axios.post(url + '/crearusuario', newUser);
+      logger.info('crearusuario', data);
+      assert.strictEqual(data.username, newUser.username);
+    });
+  });
+});
+
+describe('LOGIN USER', () => {
+  describe('POST /loginjwt', () => {
+    it('deberia loguearse con ese usuario', async () => {
+      const { data: datatoken } = await axios.post(url + '/loginjwt', {
+        username: newUser.username,
+        password: newUser.password,
+      });
+      assert.ok(datatoken);
+      logger.info('login', datatoken.token);
+      token = datatoken.token;
+    });
+  });
 });
 
 describe('test de crear Productos y Carrito ', () => {
@@ -69,8 +95,9 @@ describe('test de crear Productos y Carrito ', () => {
       { _id: addprod[0], cant: 1 },
       { _id: addprod[1], cant: 1 },
     ];
+    const { data: dataorder } = await axios.post(url + '/api/order/' + codCarrito);
 
+    logger.info(dataorder);
     assert.strictEqual(JSON.stringify(straddprod), JSON.stringify(dataget.dato.productos));
-    //  logger.info(dataget);
   });
 });
