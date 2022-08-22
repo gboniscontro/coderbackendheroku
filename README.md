@@ -4,8 +4,6 @@ se realiza un login en passport, un chat y las rutas para ejecutar por postman e
 
 https://nodecoderbackend.herokuapp.com/
 
-#ACLARACION no pude ser muy prolijo ya que no tenia mucho tiempo
-
 #Todo el proyecto se puede ver que funciona todo integralmente utilizando los test asi se ve todo el recorrido
 
 #Al Ejecutar el test se borra la base de datos y se genera todo desde cero
